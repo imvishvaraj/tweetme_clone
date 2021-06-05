@@ -28,3 +28,12 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
 
 
     return JsonResponse(data, status=status)
+
+
+def tweet_list_view(request, *args, **kwargs):
+    qs = Tweet.objects.all()
+    tweets_list = [{"id": x.id, "content": x.content} for x in qs]
+    data = {
+        "response": tweets_list
+    }
+    return JsonResponse(data)
