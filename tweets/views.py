@@ -15,15 +15,16 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
     Conume by JavaScript/Swift/Java/iOS/Android
     return json data
     """
+    data = {
+        "id": tweet_id
+    }
+    status = 200
     try:
         obj = Tweet.objects.get(id=tweet_id)
+        data['content'] = obj.content
     except:
-        raise Http404
+        data['message'] = 'Not Found'
+        status = 404
 
-    data = {
-        "id": tweet_id,
-        "content": obj.content,
-        # "image_path": obj.image.url
-    }
-    # return HttpResponse(f"<h1>Hello {tweet_id} - {obj.content}</h1>")
-    return JsonResponse(data)
+
+    return JsonResponse(data, status=status)
