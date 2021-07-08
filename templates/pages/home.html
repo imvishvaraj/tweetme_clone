@@ -14,13 +14,14 @@ Welcone to TweetMe2
 
 <script>
     // loading dynamically tweets from localhost:8000/tweets using javascript
-    const tweetsElement = document.getElementById("tweets")
+    // get and html element and set html element
+    const tweetsElement = document.getElementById("tweets")  //$("tweets") inn jquery
     tweetsElement.innerHTML = 'Loading...'   // while loadin content we are setting it as loading
 
-    var el1 = "<h1>Hie there 1</h1>"
-    var el2 = "<h1>Hie there 2</h1>"
-    var el3 = "<h1>Hie there 3</h1>"
-    tweetsElement.innerHTML = el1 + el2 + el3
+    // var el1 = "<h1>Hie there 1</h1>"
+    // var el2 = "<h1>Hie there 2</h1>"
+    // var el3 = "<h1>Hie there 3</h1>"
+    // tweetsElement.innerHTML = el1 + el2 + el3
 
     const xhr = new XMLHttpRequest()
     const method = "GET" // "POST"
@@ -31,8 +32,19 @@ Welcone to TweetMe2
     xhr.open(method, url)
     xhr.onload = function(){
         const serverResponse = xhr.response
-        var listedItems = serverResponse.response
-        console.log(listedItems)
+        const listedItems = serverResponse.response
+        var finalTweetStr = ""
+        var i;
+
+        for (i=0;i<listedItems.length;i++){
+            console.log(i)
+            console.log(listedItems[i])
+            var currentItem = "<div class='mb-4'><h1>" + listedItems[i].id + "</h1>" + "<p>" + listedItems[i].content + "</p></div>"
+            finalTweetStr += currentItem
+        }
+        tweetsElement.innerHTML = finalTweetStr
+
+        // console.log(listedItems)
     }
     xhr.send()
 </script>
