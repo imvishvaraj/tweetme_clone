@@ -17,6 +17,11 @@ Welcone to TweetMe2
     const tweetsElement = document.getElementById("tweets")
     tweetsElement.innerHTML = 'Loading...'   // while loadin content we are setting it as loading
 
+    var el1 = "<h1>Hie there 1</h1>"
+    var el2 = "<h1>Hie there 2</h1>"
+    var el3 = "<h1>Hie there 3</h1>"
+    tweetsElement.innerHTML = el1 + el2 + el3
+
     const xhr = new XMLHttpRequest()
     const method = "GET" // "POST"
     const url = "/tweets"
