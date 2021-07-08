@@ -7,9 +7,16 @@ this is amazing!!!!
 {% block content %}
 Welcone to TweetMe2
 
+<div id='tweets'>
+    Replace Me
+</div>
+
 
 <script>
     // loading dynamically tweets from localhost:8000/tweets using javascript
+    const tweetsElement = document.getElementById("tweets")
+    tweetsElement.innerHTML = 'Loading...'   // while loadin content we are setting it as loading
+
     const xhr = new XMLHttpRequest()
     const method = "GET" // "POST"
     const url = "/tweets"
