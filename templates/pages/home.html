@@ -5,10 +5,16 @@ this is amazing!!!!
 {% endblock head_title %}
 
 {% block content %}
-Welcone to TweetMe2
 
-<div id='tweets'>
-    Replace Me
+<div class="row text-center">
+    <div class="col">
+        <h1>Welcone to TweetMe2</h1>
+    </div>
+</div>
+
+
+<div class="row" id='tweets'>
+    Replace Me 
 </div>
 
 
@@ -30,6 +36,8 @@ Welcone to TweetMe2
 
     function handleDidLike(tweet_id, currentCount){
         console.log(tweet_id, currentCount)
+        currentCount++
+        return
     }
 
     function LikeBtn(tweet){
@@ -37,10 +45,10 @@ Welcone to TweetMe2
     }
 
     function formatTweetElement(tweet){
-        var formattedTweet = "<div class='mb-4 tweet' id='tweet-" + tweet.id +
+        var formattedTweet = "<div class='col-12 col-md-10 mx-auto border rounded mb-3 mt-3 tweet' id='tweet-" + tweet.id +
         "'><p>" + tweet.content + 
             "</p><div class='btn-group'>" + LikeBtn(tweet) +
-            "</p></div>"
+            "</p></div></div>"
         return formattedTweet
     }
     xhr.responseType = responseType
