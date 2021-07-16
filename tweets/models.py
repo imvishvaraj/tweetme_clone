@@ -7,6 +7,10 @@ class Tweet(models.Model):
     content = models.TextField()
     image = models.FileField(upload_to='tweets_img', blank=True, null=True)
 
+
+    class Meta:
+        ordering = ['-id']
+
     def serialize(self):
         return {
             "id": self.id,
