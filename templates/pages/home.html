@@ -36,16 +36,23 @@ this is amazing!!!!
         const myFormData = new FormData(myForm)
         const url = myForm.getAttribute("action")
         const method = myForm.getAttribute("method")
+        const responseType = "json"
         const xhr = new XMLHttpRequest()
 
+        xhr.responseType = responseType
         xhr.open(method, url)
         xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
         xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
         xhr.onload = function(){
-            const serverResponse = xhr.response
-            console.log(xhr.status, serverResponse)
-            const tweetsEl = document.getElementById("tweets")
-            loadTweets(tweetsEl)
+            if (xhr.status === 201) {
+                const newTweet = xhr.response
+                // const newTweetJson = JSON.parse(newTweet)
+                console.log(newTweet.likes)
+                const newTweetElement = formatTweetElement(newTweet)
+                console.log(newTweetElement)
+                tweetsContainerElement.prepend(newTweetElement)
+            }
+            
         }
         xhr.send(myFormData)
         
@@ -58,7 +65,7 @@ this is amazing!!!!
 
     // loading dynamically tweets from localhost:8000/tweets using javascript
     // get and html element and set html element
-    const tweetsEl = document.getElementById("tweets")  //$("tweets") inn jquery
+    const tweetsContainerElement = document.getElementById("tweets")  //$("tweets") inn jquery
     // tweetsElement.innerHTML = 'Loading...'   // while loadin content we are setting it as loading
 
     function loadTweets(tweetsElement){
@@ -87,7 +94,7 @@ this is amazing!!!!
         xhr.send()
     }
 
-    loadTweets(tweetsEl)
+    loadTweets(tweetsContainerElement)
 
     
 
